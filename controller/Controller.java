@@ -1,160 +1,87 @@
 package controller;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-
-import constant.Constant;
-import models.FitEat;
-import models.ManagePlayers;
-import view.JDStart;
-import view.WindowsGame;
+import view.Window_Game;
+import view.Window_Help;
+import view.Window_Top_Score;
+import view.Windows_Principal;
 
 public class Controller implements ActionListener {
-	private JDStart start;
-	private ManagePlayers manage;
-	private WindowsGame game;
-	private Timer timer;
+	public static final String C_enviar_mensaje = "view";
+	public static final String C_VIEW_CLIENTE = "ver";
+	public static final String C_BORRAR = "borrar";
+	public static final String C_SALIR = "Salir";
+	public static final String C_TOP_SCORE = "score";
+	public static final String C_HELP = "ayuda";
+	public static final String C_SALIR_TOP = "cerrar top";
+	public static final String C_SALIR_HELP = "Salir Help";
+	private Window_Game game;
+	public Windows_Principal wp;
+	private Window_Top_Score score;
+	private Window_Help help;
 
 	public Controller() {
-		manage = new ManagePlayers();
-		game = new WindowsGame(manage.getPlayer(), this, manage.getVillains(), manage.getShoots(),
-				manage.getShootsVillains(), manage.getCows(), manage.getUfo(), manage.getEnemy());
-		start = new JDStart(this);
-		start.setVisible(true);
+
+		wp = new Windows_Principal(this);
+		score = new Window_Top_Score(this);
+		help = new Window_Help(this);
+		game = new Window_Game(this, wp);
+		wp.setVisible(true);
+
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		switch (arg0.getActionCommand()) {
-		case Constant.EXIT:
-			start.dispose();
-			break;
-		case Constant.CONN:
-			if (start.getText() == true) {
-				start.dislBtn();
-			} else {
-				JOptionPane.showMessageDialog(null, "Diligencia todos los recuadros de texto!");
+	public void actionPerformed(ActionEvent e) {
+		switch (e.getActionCommand()) {
+		case C_VIEW_CLIENTE:
+			game.correr();
+			this.terminando();
+			if (game.getUsu() != "") {
+				wp.setVisible(false);
+
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						game.setVisible(true);
+
+					}
+				});
+
 			}
-			break;
-		case Constant.START:
-			start.setVisible(false);
-			game.setLife(String.valueOf(100));
-			game.setPunt(String.valueOf(0));
-			game.setUser(start.getName());
-			game.history(this);
-			ShootVillains();
-			playGame();
+			game.empezar();
+			;
 
 			break;
-
+		case C_SALIR:
+			wp.dispose();
+			game.cerrar();
+			game.dispose();
+			break;
+		case C_TOP_SCORE:
+			score.setVisible(true);
+			wp.setVisible(false);
+			break;
+		case C_SALIR_TOP:
+			score.setVisible(false);
+			wp.setVisible(true);
+			break;
+		case C_SALIR_HELP:
+			help.setVisible(false);
+			wp.setVisible(true);
+			break;
+		case C_HELP:
+			help.setVisible(true);
+			wp.setVisible(false);
+			break;
+		default:
+			break;
 		}
-
 	}
 
-	public FitEat Shoot() {
-		FitEat shoot = new FitEat(40, Constant.SHOOT.getImage(), manage.getPlayer().getX() + 22,
-				manage.getPlayer().getY() + 22, "UP");
-		manage.addShoot(shoot);
-		return shoot;
+	public void terminando() {
+		Thread h = new Thread(game);
+		h.start();
 	}
-
-	public void moveDown() {
-
-		manage.changeDirection("UP");
-		manage.getPlayer().move();
-	}
-
-	public void moveUp() {
-
-		manage.changeDirection("DOWN");
-		manage.getPlayer().move();
-	}
-
-	public void moveLeft() {
-		manage.changeDirection("LEFT");
-		manage.getPlayer().move();
-	}
-
-	public void moveRigth() {
-		manage.changeDirection("RIGTH");
-		manage.getPlayer().move();
-	}
-
-	public void playGame() {
-		game.play(this);
-		actualizar();
-		game.start();
-		manage.create();
-		manage.changes();
-		game.repaint();
-	}
-
-	private void actualizar() {
-		timer = new Timer(10, new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				game.getPanelGame().setVillain(manage.getVillains());
-				game.getPanelGame().setShoots(manage.getShoots());
-				game.getPanelGame().setPlayer(manage.getPlayer());
-				game.getPanelGame().setShootsVillains(manage.getShootsVillains());
-				game.getPanelGame().setUfos(manage.getEnemy());
-				game.setLife(""+manage.getPlayer().getPuntos());
-				if (manage.getPlayer().getVidas() == 0) {
-					timer.stop();
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-					game.dispose();
-					newGame();
-				}
-			}
-		});
-		timer.start();
-
-	}
-
-	public void newGame() {
-		manage = new ManagePlayers();
-		game = new WindowsGame(manage.getPlayer(), this, manage.getVillains(), manage.getShoots(),
-				manage.getShootsVillains(), manage.getCows(), manage.getUfo(), manage.getEnemy());
-	}
-
-	public void ShootVillains() {
-
-		Thread shoots = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					for (int i = 0; i < manage.getVillains().size(); i++) {
-						FitEat shoot = new FitEat(40, Constant.SHOOT2.getImage(),
-								manage.getVillains().get(i).getX() + 80, manage.getVillains().get(i).getY() + 160,
-								"DOWN");
-						manage.addShootVillains(shoot);
-						game.getPanelGame().setShootsVillains(manage.getShootsVillains());
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-
-					}
-				}
-			}
-		});
-		shoots.start();
-	}
-
 }
