@@ -72,7 +72,7 @@ public class FitEat extends MyThread {
 			x -= 5;
 		}
 		if (direccion == "DOWN") {
-			y += 5;
+			y += 2;
 		}
 
 	}

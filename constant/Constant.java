@@ -12,11 +12,11 @@ public class Constant {
 	public static final String END = "Termina";
 	public static final String START = "Inicia";
 	public static final String CREATE_PLAYER = "Player";
-	public static final ImageIcon FONDO = new ImageIcon("src/img/FONDO.jpg");
+	public static final ImageIcon FONDO = new ImageIcon("src/img/starFont.jpg");
 	public static final ImageIcon FONDO2 = new ImageIcon("src/img/starFont.jpg");
-	public static final ImageIcon FARMER = new ImageIcon("src/img/FARMER2.png");
-	public static final ImageIcon MARCIANO = new ImageIcon("src/img/obstacule.png");
-	public static final ImageIcon SHOOT = new ImageIcon("src/img/axe.png");
+	public static final ImageIcon FARMER = new ImageIcon("src/img/player.png");
+	public static final ImageIcon MARCIANO = new ImageIcon("src/img/obstacule.jpg");
+	public static final ImageIcon SHOOT = new ImageIcon("src/img/vegetable.png");
 	public static final ImageIcon SHOOT2 = new ImageIcon("src/img/shot.png");
 	public static final ImageIcon COW = new ImageIcon("src/img/vegetable.png");
 	public static final ImageIcon UFO = new ImageIcon("src/img/enemy.png");
@@ -24,4 +24,5 @@ public class Constant {
 	public static final Color AZUL_CLARO = new Color(3, 4, 41);
 	public static final Color BLANCO = new Color(122, 122, 122);
 	public static final String EXIT = "exit";
+	public static final String CONN = "conn";
 }

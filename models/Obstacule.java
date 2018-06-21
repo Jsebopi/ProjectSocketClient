@@ -22,7 +22,6 @@ public class Obstacule extends MyThread {
 		this.size = size;
 		this.image = image;
 		this.direccion = direc;
-		sprite = 0;
 		start();
 	}
 
@@ -73,32 +72,11 @@ public class Obstacule extends MyThread {
 
 	public void move() {
 
-		if (change) {
-			if (direccion == "RIGTH") {
-				x++;
-			}
-			if (direccion == "UP") {
-				y--;
-			}
-			if (Calculate.calculo(x, 10)) {
-				sprite++;
-			}
-		} else {
-			if (direccion == "RIGTH") {
-				x++;
-			}
-			if (direccion == "UP") {
-				y--;
-			}
-			if (Calculate.calculo(x, 10)) {
-				sprite--;
-			}
+		if (direccion == "RIGTH") {
+			x++;
 		}
-		if (sprite == 11) {
-			change = false;
-			sprite--;
-		} else if (sprite == 0) {
-			change = true;
+		if (direccion == "DOWN") {
+			y++;
 		}
 
 	}

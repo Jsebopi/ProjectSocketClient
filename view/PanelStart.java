@@ -27,6 +27,7 @@ public class PanelStart extends JPanel {
 		start.setIcon(new ImageIcon("src/img/start.png"));
 		start.setActionCommand(Constant.START);
 		start.addActionListener(controller);
+		start.setEnabled(false);
 
 		options = new JButton("Options");
 		options.setBackground(Constant.AZUL_CLARO);
@@ -35,6 +36,7 @@ public class PanelStart extends JPanel {
 		options.setIcon(new ImageIcon("src/img/options.png"));
 		options.setActionCommand(Constant.EXIT);
 		options.addActionListener(controller);
+		options.setEnabled(false);
 
 		exit = new JButton("Exit");
 		exit.setBackground(Constant.AZUL_CLARO);
@@ -47,6 +49,11 @@ public class PanelStart extends JPanel {
 		add(start);
 		add(options);
 		add(exit);
+	}
+
+	public void dislBtn() {
+		start.setEnabled(true);
+		options.setEnabled(true);
 	}
 
 	@Override

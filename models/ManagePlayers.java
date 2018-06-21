@@ -27,10 +27,8 @@ public class ManagePlayers {
 		vegetable = new ArrayList<>();
 		listEnemy = new ArrayList<>();
 		obstaculeFitEat = new ArrayList<>();
-		player = new Player("jugador 1", 80, Constant.FARMER.getImage(), 1200, 590, "STOP", 3, 0);
-		enemy = new Enemy("OVNI", Constant.UFO.getImage(), -900, -900, "RIGTH");
+		player = new Player("jugador 1", 80, Constant.FARMER.getImage(), 840, 520, "STOP", 3, 0);
 		createVegetable();
-		moveCow();
 		createVillain();
 	}
 
@@ -56,9 +54,7 @@ public class ManagePlayers {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (enemy.getY() > 310) {
-					vegetable.get(5).resume();
-				}
+
 				checkCollision();
 				checkCollision2();
 				checkCollisionHero();
@@ -69,21 +65,21 @@ public class ManagePlayers {
 	}
 
 	public void createVillain() {
-		Obstacule villain = new Obstacule("BATALLON " + batallon, 80, Constant.MARCIANO.getImage(), -randomY(),
-				randomY(), "RIGTH");
+		Obstacule villain = new Obstacule("BATALLON " + batallon, 80, Constant.MARCIANO.getImage(), randomX(), -600,
+				"DOWN");
+
 		obstacule.add(villain);
-		Obstacule villain2 = new Obstacule("BATALLON " + batallon, 80, Constant.MARCIANO.getImage(), -randomY(),
-				randomY(), "RIGTH");
+		Obstacule villain2 = new Obstacule("BATALLON " + batallon, 80, Constant.MARCIANO.getImage(), randomX(), -600,
+				"DOWN");
 		obstacule.add(villain2);
-		Obstacule villain3 = new Obstacule("BATALLON " + batallon, 80, Constant.MARCIANO.getImage(), -randomY(),
-				randomY(), "RIGTH");
+		Obstacule villain3 = new Obstacule("BATALLON " + batallon, 80, Constant.MARCIANO.getImage(), randomX(), -600,
+				"DOWN");
 		obstacule.add(villain3);
-		Enemy ufo = new Enemy("BATALLON " + batallon, Constant.UFO.getImage(), -randomY(), randomY(), "RIGTH");
-		listEnemy.add(ufo);
+		;
 		batallon++;
 	}
 
-	public ArrayList<Enemy> getUfos() {
+	public ArrayList<Enemy> getEnemy() {
 		return listEnemy;
 	}
 
@@ -140,7 +136,7 @@ public class ManagePlayers {
 			if (listEnemy.get(i).getRect().intersects(player.getRect())) {
 				listEnemy.get(i).stop();
 				listEnemy.remove(i);
-				player.setVidas(player.getVidas() - 1);
+				player.setPuntos(player.getPuntos() - 10);
 
 				break;
 
@@ -163,11 +159,9 @@ public class ManagePlayers {
 			if (obstaculeFitEat.get(i).getRect().intersects(player.getRect())) {
 				obstaculeFitEat.get(i).stop();
 				obstaculeFitEat.remove(i);
-				golpes++;
-				if (golpes == 5) {
-					player.setVidas(player.getVidas() - 1);
-					golpes = 0;
-				}
+
+				player.setPuntos(player.getPuntos() - 10);
+
 			}
 		}
 	}
