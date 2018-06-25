@@ -73,17 +73,17 @@ public class Window_Game extends JFrame implements Runnable {
 	@Override
 	public void run() {
 		while (timer) {
-			if (ventana.getTime() == 0 && ventana.getPUNTOS() > ventana.getPUNTOS2()) {
+			if (ventana.getTime() == 0 && ventana.getPoint() > ventana.getPoint2()) {
 				JOptionPane.showMessageDialog(null, "Fin del Juego , Gano HamburguerFc");
 				this.dispose();
 				timer = false;
 				wp.setVisible(true);
-			} else if (ventana.getTime() == 0 && ventana.getPUNTOS2() > ventana.getPUNTOS()) {
+			} else if (ventana.getTime() == 0 && ventana.getPoint2() > ventana.getPoint()) {
 				JOptionPane.showMessageDialog(null, "Fin del Juego, Gano Jugador 2");
 				timer = false;
 				this.dispose();
 				wp.setVisible(true);
-			} else if (ventana.getTime() == 0 && ventana.getPUNTOS2() == ventana.getPUNTOS()) {
+			} else if (ventana.getTime() == 0 && ventana.getPoint2() == ventana.getPoint()) {
 				JOptionPane.showMessageDialog(null, "El juego a terminado, EMPATE");
 				this.dispose();
 				timer = false;

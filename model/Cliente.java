@@ -70,7 +70,7 @@ public class Cliente extends Thread {
 		this.lista = lista;
 	}
 
-	public void enviarBola(String cliente_receptor, int x, int y) {
+	public void sendBall(String cliente_receptor, int x, int y) {
 		LinkedList<String> lista = new LinkedList<>();
 		lista.add("MENSAJE");
 		lista.add(identificador);
@@ -99,7 +99,7 @@ public class Cliente extends Thread {
 		}
 	}
 
-	public void enviarSaque(String cliente_receptor, String mover) {
+	public void sendSaque(String cliente_receptor, String mover) {
 		LinkedList<String> lista = new LinkedList<>();
 		lista.add("SAQUE");
 		lista.add(identificador);
@@ -131,7 +131,7 @@ public class Cliente extends Thread {
 		}
 	}
 
-	public void enviarJugador(String cliente_receptor, int x, int y) {
+	public void sendPlayer(String cliente_receptor, int x, int y) {
 		LinkedList<String> lista = new LinkedList<>();
 		// tipo
 		lista.add("JUGADOR");
@@ -150,7 +150,7 @@ public class Cliente extends Thread {
 		}
 	}
 
-	public void enviarJugador2(String cliente_receptor, int x, int y) {
+	public void sendPlayer2(String cliente_receptor, int x, int y) {
 		LinkedList<String> lista = new LinkedList<>();
 		// tipo
 		lista.add("JUGADOR2");

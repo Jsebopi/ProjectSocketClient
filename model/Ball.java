@@ -42,7 +42,6 @@ public class Ball extends Sprite implements comun {
 	}
 
 	public void resetState() {
-
 		x = 230;
 		y = 280;
 	}

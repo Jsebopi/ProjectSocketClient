@@ -53,18 +53,18 @@ public class paleta extends Sprite implements comun {
 		int key = e.getKeyCode();
 
 		if (key == KeyEvent.VK_A) {
-			dx = -10;
+			dx = -15;
 		}
 
 		if (key == KeyEvent.VK_D) {
-			dx = 10;
+			dx = 15;
 		}
 		if (key == KeyEvent.VK_S) {
-			dy = 10;
+			dy = 15;
 		}
 
 		if (key == KeyEvent.VK_W) {
-			dy = -10;
+			dy = -15;
 		}
 	}
 

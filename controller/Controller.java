@@ -30,18 +30,14 @@ public class Controller implements ActionListener {
 			this.terminando();
 			if (game.getUsu() != "") {
 				windowPrincipal.setVisible(false);
-
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						game.setVisible(true);
 
 					}
 				});
-
+				game.empezar();
 			}
-			game.empezar();
-			;
-
 			break;
 		case Constants.C_SALIR:
 			windowPrincipal.dispose();

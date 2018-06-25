@@ -25,10 +25,10 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 	private Court arco1, arco2;
 	private paleta2 paddle2;
 	private JPanel panel;
-	private int PUNTOS;
-	private JLabel contador;
-	private JLabel contador2;
-	private int PUNTOS2;
+	private int Point;
+	private JLabel count;
+	private JLabel count2;
+	private int point2;
 	public boolean moviendo = true;
 	public boolean cont = true;
 
@@ -77,8 +77,8 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 		point = new Point(x, y);
 		ball = new Ball();
 		this.addKeyListener(new TAdapter());
-		PUNTOS = 0;
-		PUNTOS2 = 0;
+		Point = 0;
+		point2 = 0;
 		arco1 = new Court(70, 260, 40, 100);
 		arco2 = new Court(680, 260, 40, 100);
 
@@ -88,18 +88,18 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 		panel.setLayout(new GridLayout(1, 3));
 		setOpaque(true);
 
-		contador = new JLabel(String.valueOf(PUNTOS));
-		contador.setFont(new Font("Comic Sans", Font.BOLD, 17));
-		contador.setBorder(BorderFactory.createTitledBorder("Puntos SoccerHotFc"));
-		contador.setIcon(new ImageIcon("src/img/player1.png"));
+		count = new JLabel(String.valueOf(Point));
+		count.setFont(new Font("Comic Sans", Font.BOLD, 17));
+		count.setBorder(BorderFactory.createTitledBorder("Puntos SoccerHotFc"));
+		count.setIcon(new ImageIcon("src/img/player1.png"));
 
-		contador2 = new JLabel(String.valueOf(PUNTOS2));
-		contador2.setFont(new Font("Comic Sans", Font.BOLD, 17));
-		contador2.setBorder(BorderFactory.createTitledBorder("Puntos HamburguerFC"));
-		contador2.setIcon(new ImageIcon("src/img/player2.png"));
+		count2 = new JLabel(String.valueOf(point2));
+		count2.setFont(new Font("Comic Sans", Font.BOLD, 17));
+		count2.setBorder(BorderFactory.createTitledBorder("Puntos HamburguerFC"));
+		count2.setIcon(new ImageIcon("src/img/player2.png"));
 
-		panel.add(contador2);
-		panel.add(contador);
+		panel.add(count2);
+		panel.add(count);
 		panel.add(barra);
 
 		add(panel, BorderLayout.PAGE_START);
@@ -166,28 +166,28 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 	private void panelActionPerformed(KeyEvent evt) {
 		switch (evt.getKeyCode()) {
 		case KeyEvent.VK_W:
-			cliente.enviarJugador(userName, paddle.getX(), paddle.getY());
+			cliente.sendPlayer(userName, paddle.getX(), paddle.getY());
 			break;
 		case KeyEvent.VK_D:
-			cliente.enviarJugador(userName, paddle.getX(), paddle.getY());
+			cliente.sendPlayer(userName, paddle.getX(), paddle.getY());
 			break;
 		case KeyEvent.VK_A:
-			cliente.enviarJugador(userName, paddle.getX(), paddle.getY());
+			cliente.sendPlayer(userName, paddle.getX(), paddle.getY());
 			break;
 		case KeyEvent.VK_S:
-			cliente.enviarJugador(userName, paddle.getX(), paddle.getY());
+			cliente.sendPlayer(userName, paddle.getX(), paddle.getY());
 			break;
 		case KeyEvent.VK_I:
-			cliente.enviarJugador2(userName, paddle2.getX(), paddle2.getY());
+			cliente.sendPlayer2(userName, paddle2.getX(), paddle2.getY());
 			break;
 		case KeyEvent.VK_L:
-			cliente.enviarJugador2(userName, paddle2.getX(), paddle2.getY());
+			cliente.sendPlayer2(userName, paddle2.getX(), paddle2.getY());
 			break;
 		case KeyEvent.VK_J:
-			cliente.enviarJugador2(userName, paddle2.getX(), paddle2.getY());
+			cliente.sendPlayer2(userName, paddle2.getX(), paddle2.getY());
 			break;
 		case KeyEvent.VK_K:
-			cliente.enviarJugador2(userName, paddle2.getX(), paddle2.getY());
+			cliente.sendPlayer2(userName, paddle2.getX(), paddle2.getY());
 			repaint();
 			break;
 		default:
@@ -195,20 +195,20 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 		}
 	}
 
-	public int getPUNTOS() {
-		return PUNTOS;
+	public int getPoint() {
+		return Point;
 	}
 
-	public void setPUNTOS(int pUNTOS) {
-		PUNTOS = pUNTOS;
+	public void setPoint(int point) {
+		Point = point;
 	}
 
-	public int getPUNTOS2() {
-		return PUNTOS2;
+	public int getPoint2() {
+		return point2;
 	}
 
-	public void setPUNTOS2(int pUNTOS2) {
-		PUNTOS2 = pUNTOS2;
+	public void setPoint2(int points2) {
+		point2 = points2;
 	}
 
 	@Override
@@ -253,43 +253,43 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 		paddle.move();
 		paddle2.move();
 		if (moviendo) {
-			cliente.enviarBola(userName, ball.getX(), ball.getY());
+			cliente.sendBall(userName, ball.getX(), ball.getY());
 		}
-		cliente.enviarJugador(userName, paddle.getX(), paddle.getY());
-		cliente.enviarJugador2(userName, paddle2.getX(), paddle2.getY());
+		cliente.sendPlayer(userName, paddle.getX(), paddle.getY());
+		cliente.sendPlayer2(userName, paddle2.getX(), paddle2.getY());
 		repaint();
 	}
 
 	public void checkPuntaje() {
 		if ((ball.getRect()).intersects(arco1.getRect())) {
-			PUNTOS = PUNTOS + 60;
-			if (PUNTOS2 > 0) {
-				PUNTOS2 = PUNTOS2 - 5;
+			Point = Point + 60;
+			if (point2 > 0) {
+				point2 = point2 - 5;
 			} else {
-				PUNTOS2 = 0;
+				point2 = 0;
 			}
-			contador.setText(String.valueOf(PUNTOS));
-			contador2.setText(String.valueOf(PUNTOS2));
+			count.setText(String.valueOf(Point));
+			count2.setText(String.valueOf(point2));
 			ball.setX(570);
 			ball.setY(280);
-			cliente.enviarPuntaje1(userName, PUNTOS);
+			cliente.enviarPuntaje1(userName, Point);
 			moviendo = false;
-			cliente.enviarSaque(userName, "False");
+			cliente.sendSaque(userName, "False");
 			ball.setXDir(-10);
 			repaint();
 		} else if ((ball.getRect()).intersects(arco2.getRect())) {
-			PUNTOS2 = PUNTOS2 + 60;
-			if (PUNTOS > 0) {
-				PUNTOS = PUNTOS - 5;
+			point2 = point2 + 60;
+			if (Point > 0) {
+				Point = Point - 5;
 			} else {
-				PUNTOS = 0;
+				Point = 0;
 			}
-			contador2.setText(String.valueOf(PUNTOS2));
-			contador.setText(String.valueOf(PUNTOS));
+			count2.setText(String.valueOf(point2));
+			count.setText(String.valueOf(Point));
 			ball.resetState();
-			cliente.enviarPuntaje2(userName, PUNTOS2);
+			cliente.enviarPuntaje2(userName, point2);
 			moviendo = false;
-			cliente.enviarSaque(userName, "False");
+			cliente.sendSaque(userName, "False");
 			ball.setXDir(10);
 			repaint();
 		}
@@ -320,7 +320,7 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 		if (ballX != null) {
 
 			if ((ballX.getRect()).intersects(paddle.getRect())) {
-				cliente.enviarSaque(userName, "True");
+				cliente.sendSaque(userName, "True");
 				int paddleLPos = (int) paddle.getRect().getMinX();
 				int ballLPos = (int) ballX.getRect().getMinX();
 
@@ -356,7 +356,7 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 			}
 			if ((ballX.getRect()).intersects(paddle2.getRect())) {
 				moviendo = true;
-				cliente.enviarSaque(userName, "True");
+				cliente.sendSaque(userName, "True");
 				int paddleLPos = (int) paddle2.getRect().getMinX();
 				int ballLPos = (int) ballX.getRect().getMinX();
 
@@ -394,16 +394,14 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 	}
 
 	public void addjugador2(int x, int y) {
-		// TODO Auto-generated method stub
 		paddle2.setX(x);
 		paddle2.setY(y);
 		repaint();
 	}
 
 	public void addPuntaje1(int p) {
-		// TODO Auto-generated method stub
-		PUNTOS = p;
-		contador.setText(String.valueOf(PUNTOS));
+		Point = p;
+		count.setText(String.valueOf(Point));
 		ball.setX(570);
 		ball.setY(280);
 		repaint();
@@ -423,9 +421,8 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 	}
 
 	public void addPuntaje2(int p) {
-		// TODO Auto-generated method stub
-		PUNTOS2 = p;
-		contador2.setText(String.valueOf(PUNTOS2));
+		point2 = p;
+		count2.setText(String.valueOf(point2));
 		ball.resetState();
 		repaint();
 	}
