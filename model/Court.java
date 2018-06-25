@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Arco {
+public class Court {
 	private int x;
 	private int y;
 	private int width;
 	private int heigth;
 
-	public Arco(int x, int y, int width, int heigth) {
+	public Court(int x, int y, int width, int heigth) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -55,7 +55,7 @@ public class Arco {
 	}
 
 	public void pintarArco(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, width, heigth);
 	}
 

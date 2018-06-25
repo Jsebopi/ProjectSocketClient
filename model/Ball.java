@@ -2,17 +2,17 @@ package model;
 
 import javax.swing.ImageIcon;
 
-public class balon extends Sprite implements comun {
+public class Ball extends Sprite implements comun {
 
 	private int xdir;
 	private int ydir;
 
-	public balon() {
+	public Ball() {
 
 		xdir = 10;
 		ydir = -10;
 
-		ImageIcon ii = new ImageIcon("img/shot.png");
+		ImageIcon ii = new ImageIcon("src/img/soccer.png");
 		image = ii.getImage();
 
 		width = image.getWidth(null);
