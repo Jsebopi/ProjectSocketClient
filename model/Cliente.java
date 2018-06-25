@@ -185,7 +185,7 @@ public class Cliente extends Thread {
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(ventana, "La comunicación con el servidor se ha\n"
-					+ "perdido, este chat tendrá que finalizar.\n" + "Esta aplicación se cerrará.");
+					+ "perdido, este Juego tendrá que finalizar.\n" + "Esta aplicación se cerrará.");
 			System.exit(0);
 		}
 	}

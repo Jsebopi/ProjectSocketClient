@@ -16,8 +16,7 @@ public class Window_Game extends JFrame implements Runnable {
 	private Windows_Principal wp;
 	private boolean timer;
 
-	public Window_Game(Controller c, Windows_Principal wp) {
-
+	public Window_Game(Controller c, Windows_Principal wp, String[] user) {
 		setTitle("Soccer Hot dog");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(800, 600);
@@ -26,10 +25,9 @@ public class Window_Game extends JFrame implements Runnable {
 		setIconImage(image);
 		setIgnoreRepaint(true);
 		setResizable(false);
-		ventana = new VentanaC(c);
+		ventana = new VentanaC(c, user);
 		add(ventana);
 		timer = true;
-		usu = ventana.getUsuario();
 		this.wp = wp;
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -67,15 +65,16 @@ public class Window_Game extends JFrame implements Runnable {
 		return usu;
 	}
 
-	public void setUsu(String usu) {
-		this.usu = usu;
+	public void setUsu(String user) {
+		this.usu = user;
+		ventana.setUsuario(usu);
 	}
 
 	@Override
 	public void run() {
 		while (timer) {
 			if (ventana.getTime() == 0 && ventana.getPUNTOS() > ventana.getPUNTOS2()) {
-				JOptionPane.showMessageDialog(null, "Fin del Juego , Gano jugador 1");
+				JOptionPane.showMessageDialog(null, "Fin del Juego , Gano HamburguerFc");
 				this.dispose();
 				timer = false;
 				wp.setVisible(true);

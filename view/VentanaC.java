@@ -15,14 +15,12 @@ import model.paleta2;
 public class VentanaC extends JPanel implements KeyListener, Runnable {
 	private static final long serialVersionUID = 1L;
 	private Point point;
-	private String userName = "Juan";
+	private String userName;
 	private int x, y;
 	private JLabel fondo;
 	private JdProgres barra;
 	private Ball ball;
 	private paleta paddle;
-	private final String DEFAULT_PORT = "10101";
-	private final String DEFAULT_IP = "localhost";
 	private final Cliente cliente;
 	private Court arco1, arco2;
 	private paleta2 paddle2;
@@ -34,9 +32,9 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 	public boolean moviendo = true;
 	public boolean cont = true;
 
-	public VentanaC(Controller controller) {
+	public VentanaC(Controller controller, String[] user) {
 		initComponents();
-		String ip_puerto_nombre[] = getIP_Puerto_Nombre();
+		String ip_puerto_nombre[] = user;
 		String ip = ip_puerto_nombre[0];
 		String puerto = ip_puerto_nombre[1];
 		String nombre = ip_puerto_nombre[2];
@@ -153,10 +151,6 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 		cliente.confirmarDesconexion();
 	}
 
-	public String getUsuario() {
-		return userName;
-	}
-
 	public void setUsuario(String usuario) {
 		this.userName = usuario;
 	}
@@ -215,52 +209,6 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 
 	public void setPUNTOS2(int pUNTOS2) {
 		PUNTOS2 = pUNTOS2;
-	}
-
-	public String[] getIP_Puerto_Nombre() {
-		String s[] = new String[3];
-		s[0] = DEFAULT_IP;
-		s[1] = DEFAULT_PORT;
-		JTextField ip = new JTextField(20);
-		ip.setBorder(BorderFactory.createTitledBorder("Ip Conexión"));
-		ip.setFont(new Font("Comic Sans", Font.BOLD, 16));
-		ip.setBackground(Color.decode("#FAEB9E"));
-		ip.setForeground(Color.decode("#504117"));
-		ip.setHorizontalAlignment(0);
-
-		JTextField puerto = new JTextField(20);
-		puerto.setBorder(BorderFactory.createTitledBorder("Puerto de la conexión"));
-		puerto.setFont(new Font("Comic Sans", Font.BOLD, 16));
-		puerto.setBackground(Color.decode("#FAEB9E"));
-		puerto.setForeground(Color.decode("#504117"));
-		puerto.setHorizontalAlignment(0);
-
-		JTextField usuario = new JTextField(20);
-		usuario.setBorder(BorderFactory.createTitledBorder("Nombre Jugador"));
-		usuario.setFont(new Font("Comic Sans", Font.BOLD, 16));
-		usuario.setBackground(Color.decode("#FAEB9E"));
-		usuario.setForeground(Color.decode("#504117"));
-		usuario.setHorizontalAlignment(0);
-
-		ip.setText(DEFAULT_IP);
-		puerto.setText(DEFAULT_PORT);
-		usuario.setText(userName);
-		JPanel myPanel = new JPanel();
-		myPanel.setLayout(new GridLayout(3, 1));
-		myPanel.add(ip);
-		myPanel.add(puerto);
-		myPanel.add(usuario);
-
-		int result = JOptionPane.showConfirmDialog(null, myPanel, "Configuraciones de la comunicación",
-				JOptionPane.OK_CANCEL_OPTION);
-		if (result == JOptionPane.OK_OPTION) {
-			s[0] = ip.getText();
-			s[1] = puerto.getText();
-			s[2] = usuario.getText();
-		} else {
-			System.exit(0);
-		}
-		return s;
 	}
 
 	@Override
@@ -352,12 +300,10 @@ public class VentanaC extends JPanel implements KeyListener, Runnable {
 		if (ballX.getRect().getMinY() <= 60) {
 
 			ballX.setYDir(10);
-
 		}
 		if (ballX.getRect().getMaxY() >= 580) {
 
 			ballX.setYDir(-10);
-
 		}
 
 		if (ballX.getRect().getMaxX() >= 720) {

@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import constants.Constants;
 import controller.Controller;
 
 public class Windows_Principal extends JFrame {
@@ -22,8 +26,8 @@ public class Windows_Principal extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu menuArchivo;
 	private JMenuItem itemHelp;
-	private JButton signUp, exit, users, help;
-	private JLabel welcom;
+	private JButton signUp, exit, help;
+	private JLabel welcom, users;
 	private JLabel nameApp;
 	private PanelBackground imagel;
 
@@ -32,7 +36,7 @@ public class Windows_Principal extends JFrame {
 		setSize(550, 400);
 		setMinimumSize(new Dimension(this.getWidth(), this.getHeight()));
 		setResizable(false);
-		Image image = Toolkit.getDefaultToolkit().getImage("src/img/icon.png");
+		Image image = Toolkit.getDefaultToolkit().getImage("src/img/soccer.png");
 		setIconImage(image);
 		setLocationRelativeTo(null);
 		imagel = new PanelBackground(this.getWidth(), this.getHeight(), "fondo.jpg");
@@ -43,7 +47,7 @@ public class Windows_Principal extends JFrame {
 
 		itemHelp = new JMenuItem("Ayuda");
 		itemHelp.setIcon(new ImageIcon("img/information.png"));
-		itemHelp.setActionCommand(Controller.C_HELP);
+		itemHelp.setActionCommand(Constants.C_HELP);
 		itemHelp.setBackground(Color.WHITE);
 		itemHelp.setFont(new Font("Comic Sans Ms", 10, 15));
 		itemHelp.addActionListener(con);
@@ -81,7 +85,7 @@ public class Windows_Principal extends JFrame {
 		signUp = new JButton("Play");
 		signUp.setIcon(new ImageIcon("src/img/games-control.png"));
 		signUp.setFont(new Font("Comic Sans Ms", 10, 18));
-		signUp.setActionCommand(Controller.C_VIEW_CLIENTE);
+		signUp.setActionCommand(Constants.C_VIEW_CLIENTE);
 		signUp.addActionListener(con);
 		signUp.setBackground(Color.decode("#FAEB9E"));
 		signUp.setForeground(Color.decode("#504117"));
@@ -94,7 +98,7 @@ public class Windows_Principal extends JFrame {
 		exit = new JButton("Salir");
 		exit.setIcon(new ImageIcon("src/img/exit.png"));
 		exit.setFont(new Font("Comic Sans Ms", 10, 18));
-		exit.setActionCommand(Controller.C_SALIR);
+		exit.setActionCommand(Constants.C_SALIR);
 		exit.addActionListener(con);
 		exit.setBackground(Color.decode("#FAEB9E"));
 		exit.setForeground(Color.decode("#504117"));
@@ -104,13 +108,11 @@ public class Windows_Principal extends JFrame {
 		c.insets = new Insets(0, 40, 0, 60);
 		imagel.add(exit, c);
 
-		users = new JButton("En Linea");
-		users.setIcon(new ImageIcon("src/img/antena.png"));
-		users.setFont(new Font("Comic Sans Ms", 10, 18));
-		users.setActionCommand(Controller.C_TOP_CONNEC);
-		users.addActionListener(con);
-		users.setBackground(Color.decode("#FAEB9E"));
-		users.setForeground(Color.decode("#504117"));
+		users = new JLabel("");
+		users.setIcon(new ImageIcon("src/img/user.png"));
+		users.setFont(new Font("Comic Sans Ms", Font.CENTER_BASELINE, 18));
+		users.setForeground(Color.white);
+		users.setBorder(BorderFactory.createTitledBorder("Conectado: "));
 
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
@@ -121,7 +123,7 @@ public class Windows_Principal extends JFrame {
 		help = new JButton("Acerca de");
 		help.setIcon(new ImageIcon("src/img/information.png"));
 		help.setFont(new Font("Comic Sans Ms", 10, 18));
-		help.setActionCommand(Controller.C_HELP);
+		help.setActionCommand(Constants.C_HELP);
 		help.addActionListener(con);
 		help.setBackground(Color.decode("#FAEB9E"));
 		help.setForeground(Color.decode("#504117"));
@@ -134,5 +136,9 @@ public class Windows_Principal extends JFrame {
 
 		this.add(imagel);
 
+	}
+
+	public void setUser(String name) {
+		users.setText(name);
 	}
 }
